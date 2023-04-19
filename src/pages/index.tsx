@@ -1,9 +1,10 @@
 import Head from "next/head";
-import { Poppins } from "next/font/google";
-
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
+import { Header, Search, List, ListItem } from "@/components";
+import styles from "@/styles/Home.module.scss";
 
 export default function Home() {
+  const emojiList = ["😎", "😆", "😅", "🥲", "🥳"];
+
   return (
     <>
       <Head>
@@ -16,11 +17,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={poppins.className}>
-        <h1>Emoji Picker</h1>
-        <p>
-          💾 Busque seus emojis favoritos e compartilhe com maior facilidade
-        </p>
+      <main className={styles.homepage}>
+        <div className={styles.homeContainer}>
+          <Header />
+          <Search />
+
+          <List>
+            {emojiList.map((emoji) => (
+              <ListItem key={emoji} emoji={emoji} />
+            ))}
+          </List>
+        </div>
       </main>
     </>
   );
