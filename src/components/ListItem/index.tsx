@@ -2,20 +2,20 @@ import toast from "react-hot-toast";
 import styles from "./styles.module.scss";
 
 export interface ListItemProps {
-  emoji: string;
+  data: string;
 }
 
-export function ListItem({ emoji }: ListItemProps) {
-  function handleCopyEmoji() {
-    navigator.clipboard.writeText(emoji).then(() => {
-      toast.success(`${emoji} copiado com sucesso`);
+export function ListItem({ data }: ListItemProps) {
+  function handleCopyText() {
+    navigator.clipboard.writeText(data).then(() => {
+      toast.success(`${data} copied`);
     });
   }
 
   return (
     <li className={styles.listItem}>
-      <button onClick={handleCopyEmoji} type="button">
-        {emoji}
+      <button onClick={handleCopyText} type="button">
+        {data}
       </button>
     </li>
   );
