@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.0.8",
@@ -22,6 +23,12 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "sass": "^1.62.0"
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@vitejs/plugin-react": "^3.1.0",
+    "jsdom": "^21.1.1",
+    "sass": "^1.62.0",
+    "vitest": "^0.30.1"
   }
 }
