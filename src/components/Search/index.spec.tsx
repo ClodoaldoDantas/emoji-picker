@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { render, screen } from "@testing-library/react";
 import { Search } from ".";
 
 describe("Search", () => {
@@ -7,11 +8,11 @@ describe("Search", () => {
     expect(screen.getByRole("textbox")).toBeInTheDocument();
   });
 
-  it("updates input value on change", () => {
+  it("updates input value on change", async () => {
     render(<Search />);
     const input = screen.getByRole("textbox") as HTMLInputElement;
+    await userEvent.type(input, "test");
 
-    fireEvent.change(input, { target: { value: "test" } });
     expect(input.value).toBe("test");
   });
 });

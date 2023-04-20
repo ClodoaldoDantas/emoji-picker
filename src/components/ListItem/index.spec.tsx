@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { render, screen } from "@testing-library/react";
 import { ListItem } from ".";
 
 const mockClipboard = {
@@ -16,11 +17,11 @@ describe("ListItem", () => {
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
 
-  it("should copy emoji when button is clicked", () => {
+  it("should copy emoji when button is clicked", async () => {
     render(<ListItem data="🚀" />);
 
     const button = screen.getByRole("button");
-    fireEvent.click(button);
+    await userEvent.click(button);
 
     expect(mockClipboard.writeText).toHaveBeenCalledWith("🚀");
   });
