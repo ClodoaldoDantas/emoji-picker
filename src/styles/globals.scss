@@ -32,6 +32,11 @@ body {
   line-height: 1.5;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* custom scrollbar */
 ::-webkit-scrollbar {
   width: 20px;

@@ -1,0 +1,12 @@
+.localeSwitcher {
+  display: flex;
+  align-items: center;
+
+  a {
+    &:first-child {
+      border-right: 1px solid #bbb;
+      margin-right: 1rem;
+      padding-right: 1rem;
+    }
+  }
+}
