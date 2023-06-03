@@ -1,19 +1,37 @@
 import Link from 'next/link'
+import Image from 'next/image'
+import classNames from 'classnames'
 import { useRouter } from 'next/router'
+
 import styles from './styles.module.scss'
 
+const locales = [
+  {
+    locale: 'pt-BR',
+    flag: 'https://hatscripts.github.io/circle-flags/flags/br.svg',
+  },
+  {
+    locale: 'en-US',
+    flag: 'https://hatscripts.github.io/circle-flags/flags/us.svg',
+  },
+]
+
 export function LocaleSwitcher() {
-  const { route } = useRouter()
+  const { route, locale } = useRouter()
 
   return (
     <div className={styles.localeSwitcher}>
-      <Link href={route} locale="pt-BR">
-        🇧🇷 pt-BR
-      </Link>
-
-      <Link href={route} locale="en-US">
-        🇺🇸 en-US
-      </Link>
+      {locales.map((item) => (
+        <Link
+          className={classNames({ [styles.active]: locale === item.locale })}
+          key={item.locale}
+          href={route}
+          locale={item.locale}
+        >
+          <Image src={item.flag} alt="" width={20} height={20} />
+          <span>{item.locale}</span>
+        </Link>
+      ))}
     </div>
   )
 }

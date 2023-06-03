@@ -3,6 +3,15 @@
   align-items: center;
 
   a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &.active {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
     &:first-child {
       border-right: 1px solid #bbb;
       margin-right: 1rem;

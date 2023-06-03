@@ -18,7 +18,7 @@ export default function Home({ emojiList }: { emojiList: Emoji[] }) {
   return (
     <>
       <Head>
-        <title>Emoji Picker</title>
+        <title>{t('title')}</title>
         <meta name="description" content={t('description')} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
