@@ -11,7 +11,7 @@ export interface ListItemProps {
 export function ListItem({ data }: ListItemProps) {
   async function handleCopyText() {
     await navigator.clipboard.writeText(data.character)
-    toast.success(`${data} copied`)
+    toast.success(`${data.character} copied`)
   }
 
   return (
