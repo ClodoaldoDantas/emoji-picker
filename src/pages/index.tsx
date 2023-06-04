@@ -1,14 +1,19 @@
 import Head from 'next/head'
-import { GetStaticPropsContext } from 'next'
 import { useState } from 'react'
+import { GetStaticPropsContext } from 'next'
+import { useRouter } from 'next/router'
 import { useTranslations } from 'next-intl'
+import { Warning } from '@phosphor-icons/react'
 
 import { Header, Search, List, ListItem } from '@/components'
 import { getEmojiList, Emoji } from '@/services/emoji'
+
 import styles from '@/styles/Home.module.scss'
 
 export default function Home({ emojiList }: { emojiList: Emoji[] }) {
   const t = useTranslations('Home')
+  const router = useRouter()
+
   const [filter, setFilter] = useState('')
 
   function handleSearch(value: string) {
@@ -33,6 +38,19 @@ export default function Home({ emojiList }: { emojiList: Emoji[] }) {
           <Header />
 
           <Search onSearch={handleSearch} />
+
+          {router.locale === 'pt-BR' && (
+            <span className={styles.info}>
+              * É necessário pesquisar pelo emoji em inglês.
+            </span>
+          )}
+
+          {filteredEmojiList.length === 0 && (
+            <div className={styles.alert}>
+              <Warning size={20} />
+              {t('notFound')}
+            </div>
+          )}
 
           <List>
             {filteredEmojiList.map((emoji) => (

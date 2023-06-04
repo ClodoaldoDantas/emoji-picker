@@ -7,12 +7,12 @@ import styles from './styles.module.scss'
 
 const locales = [
   {
-    locale: 'pt-BR',
-    flag: 'https://hatscripts.github.io/circle-flags/flags/br.svg',
-  },
-  {
     locale: 'en-US',
     flag: 'https://hatscripts.github.io/circle-flags/flags/us.svg',
+  },
+  {
+    locale: 'pt-BR',
+    flag: 'https://hatscripts.github.io/circle-flags/flags/br.svg',
   },
 ]
 
