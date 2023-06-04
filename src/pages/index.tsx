@@ -11,6 +11,10 @@ export default function Home({ emojiList }: { emojiList: Emoji[] }) {
   const t = useTranslations('Home')
   const [filter, setFilter] = useState('')
 
+  function handleSearch(value: string) {
+    setFilter(value)
+  }
+
   const filteredEmojiList = emojiList.filter((emoji) => {
     return emoji.unicodeName.toLowerCase().includes(filter.toLowerCase())
   })
@@ -27,11 +31,12 @@ export default function Home({ emojiList }: { emojiList: Emoji[] }) {
       <main className={styles.homepage}>
         <div className={styles.homeContainer}>
           <Header />
-          <Search value={filter} onChange={(e) => setFilter(e.target.value)} />
+
+          <Search onSearch={handleSearch} />
 
           <List>
             {filteredEmojiList.map((emoji) => (
-              <ListItem key={emoji.slug} data={emoji.character} />
+              <ListItem key={emoji.slug} data={emoji} />
             ))}
           </List>
         </div>
@@ -42,11 +47,12 @@ export default function Home({ emojiList }: { emojiList: Emoji[] }) {
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   const emojiList = await getEmojiList()
+  const messages = (await import(`../locales/${locale}.json`)).default
 
   return {
     props: {
       emojiList,
-      messages: (await import(`../locales/${locale}.json`)).default,
+      messages,
     },
   }
 }

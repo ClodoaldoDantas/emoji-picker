@@ -1,18 +1,34 @@
 import { MagnifyingGlass } from '@phosphor-icons/react'
-import { InputHTMLAttributes } from 'react'
 import { useTranslations } from 'next-intl'
 
 import styles from './styles.module.scss'
+import { FormEvent, useState } from 'react'
 
-interface SearchProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface SearchProps {
+  onSearch: (value: string) => void
+}
 
-export function Search(props: SearchProps) {
+export function Search({ onSearch }: SearchProps) {
+  const [text, setText] = useState('')
   const t = useTranslations('Home')
 
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault()
+    onSearch(text)
+  }
+
   return (
-    <div className={styles.searchForm}>
-      <MagnifyingGlass size={20} />
-      <input type="text" placeholder={t('placeholder')} {...props} />
-    </div>
+    <form onSubmit={handleSubmit} className={styles.searchForm}>
+      <input
+        type="text"
+        placeholder={t('placeholder')}
+        value={text}
+        onChange={(event) => setText(event.target.value)}
+      />
+
+      <button type="submit">
+        <MagnifyingGlass size={20} />
+      </button>
+    </form>
   )
 }
