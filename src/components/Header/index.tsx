@@ -9,7 +9,9 @@ export function Header() {
     <header className={styles.header}>
       <div>
         <h1 className={styles.headerTitle}>✂️ {t('title')}</h1>
-        <p className={styles.headerSubtitle}>{t('description')}</p>
+        <p data-testid="description" className={styles.headerSubtitle}>
+          {t('description')}
+        </p>
       </div>
 
       <LocaleSwitcher />
