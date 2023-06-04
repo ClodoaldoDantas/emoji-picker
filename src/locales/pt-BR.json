@@ -2,7 +2,7 @@
   "Home": {
     "title": "Seletor de emojis",
     "description": "Pesquise seus emojis favoritos e compartilhe com mais facilidade",
-    "placeholder": "Pesquisar...",
+    "label": "Pesquisar",
     "notFound": "Nenhum registro encontrado"
   }
 }

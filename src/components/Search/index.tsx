@@ -21,12 +21,12 @@ export function Search({ onSearch }: SearchProps) {
     <form onSubmit={handleSubmit} className={styles.searchForm}>
       <input
         type="text"
-        placeholder={t('placeholder')}
+        placeholder={t('label') + '...'}
         value={text}
         onChange={(event) => setText(event.target.value)}
       />
 
-      <button type="submit">
+      <button aria-label={t('label')} type="submit">
         <MagnifyingGlass size={20} />
       </button>
     </form>

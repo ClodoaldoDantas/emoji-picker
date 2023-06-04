@@ -29,7 +29,7 @@ export function LocaleSwitcher() {
           locale={item.locale}
         >
           <Image src={item.flag} alt="" width={20} height={20} />
-          <span>{item.locale}</span>
+          {item.locale}
         </Link>
       ))}
     </div>

@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import { useState } from 'react'
 import { GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Warning } from '@phosphor-icons/react'
 
@@ -38,12 +38,6 @@ export default function Home({ emojiList }: { emojiList: Emoji[] }) {
           <Header />
 
           <Search onSearch={handleSearch} />
-
-          {router.locale === 'pt-BR' && (
-            <span className={styles.info}>
-              * É necessário pesquisar pelo emoji em inglês.
-            </span>
-          )}
 
           {filteredEmojiList.length === 0 && (
             <div className={styles.alert}>
