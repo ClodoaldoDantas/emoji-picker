@@ -21,7 +21,7 @@ export function Search({ onSearch }: SearchProps) {
     <form onSubmit={handleSubmit} className={styles.searchForm}>
       <input
         type="text"
-        placeholder={t('label') + '...'}
+        placeholder={t('label')}
         value={text}
         onChange={(event) => setText(event.target.value)}
       />

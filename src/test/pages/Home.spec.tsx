@@ -30,7 +30,7 @@ describe('Home', () => {
     render(<Home emojiList={emojiList} />)
 
     const searchInput = screen.getByRole('textbox') as HTMLInputElement
-    const searchButton = screen.getByRole('button', { name: 'Search' })
+    const searchButton = screen.getByRole('button', { name: 'Search emoji by name' })
 
     await userEvent.type(searchInput, 'ghost')
     await userEvent.click(searchButton)
@@ -43,7 +43,7 @@ describe('Home', () => {
     render(<Home emojiList={emojiList} />)
 
     const searchInput = screen.getByRole('textbox') as HTMLInputElement
-    const searchButton = screen.getByRole('button', { name: 'Search' })
+    const searchButton = screen.getByRole('button', { name: 'Search emoji by name' })
 
     await userEvent.type(searchInput, 'not found')
     await userEvent.click(searchButton)

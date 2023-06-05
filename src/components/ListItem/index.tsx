@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 import styles from './styles.module.scss'
 
@@ -9,9 +10,11 @@ export interface ListItemProps {
 }
 
 export function ListItem({ data }: ListItemProps) {
+  const t = useTranslations('Home')
+
   async function handleCopyText() {
     await navigator.clipboard.writeText(data.character)
-    toast.success(`${data.character} copied`)
+    toast.success(`${data.character} ${t("copied")}`)
   }
 
   return (

@@ -2,7 +2,8 @@
   "Home": {
     "title": "Emoji Picker",
     "description": "Search for your favorite emojis and share more easily",
-    "label": "Search",
+    "label": "Search emoji by name",
+    "copied": "copied to clipboard",
     "notFound": "No items found"
   }
 }
