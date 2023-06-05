@@ -1,18 +1,29 @@
-import userEvent from "@testing-library/user-event";
-import { render, screen } from "@testing-library/react";
-import { Search } from ".";
+import userEvent from '@testing-library/user-event'
+import { render, screen } from '@/test/utils'
+import { Search } from '.'
 
-describe("Search", () => {
-  it("should render correctly", () => {
-    render(<Search />);
-    expect(screen.getByRole("textbox")).toBeInTheDocument();
-  });
+describe('Search', () => {
+  it('should render correctly', () => {
+    const onSearchMock = vi.fn()
 
-  it("updates input value on change", async () => {
-    render(<Search />);
-    const input = screen.getByRole("textbox") as HTMLInputElement;
-    await userEvent.type(input, "test");
+    render(<Search onSearch={onSearchMock} />)
 
-    expect(input.value).toBe("test");
-  });
-});
+    expect(screen.getByRole('textbox')).toBeInTheDocument()
+    expect(screen.getByRole('button')).toBeInTheDocument()
+  })
+
+  it('should be able to submit the form', async () => {
+    const onSearchMock = vi.fn()
+
+    render(<Search onSearch={onSearchMock} />)
+
+    const input = screen.getByRole('textbox')
+    const button = screen.getByRole('button')
+
+    await userEvent.type(input, 'testing')
+    await userEvent.click(button)
+
+    expect(onSearchMock).toHaveBeenCalledTimes(1)
+    expect(onSearchMock).toHaveBeenCalledWith('testing')
+  })
+})

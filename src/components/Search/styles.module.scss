@@ -1,5 +1,7 @@
 .searchForm {
-  padding: 0 1rem;
+  padding-left: 1rem;
+  padding-right: 0.5rem;
+
   height: 2.5rem;
   width: 100%;
   border: 1px solid var(--border);
@@ -17,5 +19,12 @@
     border: 0;
     outline: 0;
     color: var(--text);
+  }
+
+  button {
+    height: 100%;
+    width: 2.5rem;
+    border: 0;
+    background-color: transparent;
   }
 }

@@ -1,29 +1,34 @@
-import Head from "next/head";
-import { useState } from "react";
-import { Header, Search, List, ListItem } from "@/components";
-import styles from "@/styles/Home.module.scss";
+import Head from 'next/head'
+import { GetStaticPropsContext } from 'next'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { Warning } from '@phosphor-icons/react'
 
-interface Emoji {
-  slug: string;
-  unicodeName: string;
-  character: string;
-}
+import { Header, Search, List, ListItem } from '@/components'
+import { getEmojiList, Emoji } from '@/services/emoji'
+
+import styles from '@/styles/Home.module.scss'
 
 export default function Home({ emojiList }: { emojiList: Emoji[] }) {
-  const [filter, setFilter] = useState("");
+  const t = useTranslations('Home')
+  const router = useRouter()
+
+  const [filter, setFilter] = useState('')
+
+  function handleSearch(value: string) {
+    setFilter(value)
+  }
 
   const filteredEmojiList = emojiList.filter((emoji) => {
-    return emoji.unicodeName.toLowerCase().includes(filter.toLowerCase());
-  });
+    return emoji.unicodeName.toLowerCase().includes(filter.toLowerCase())
+  })
 
   return (
     <>
       <Head>
-        <title>Emoji Picker</title>
-        <meta
-          name="description"
-          content="Search for your favorite emojis and share more easily"
-        />
+        <title>{t('title')}</title>
+        <meta name="description" content={t('description')} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -31,29 +36,35 @@ export default function Home({ emojiList }: { emojiList: Emoji[] }) {
       <main className={styles.homepage}>
         <div className={styles.homeContainer}>
           <Header />
-          <Search value={filter} onChange={(e) => setFilter(e.target.value)} />
+
+          <Search onSearch={handleSearch} />
+
+          {filteredEmojiList.length === 0 && (
+            <div className={styles.alert}>
+              <Warning size={20} />
+              {t('notFound')}
+            </div>
+          )}
 
           <List>
             {filteredEmojiList.map((emoji) => (
-              <ListItem key={emoji.slug} data={emoji.character} />
+              <ListItem key={emoji.slug} data={emoji} />
             ))}
           </List>
         </div>
       </main>
     </>
-  );
+  )
 }
 
-export async function getStaticProps() {
-  const res = await fetch(
-    `https://emoji-api.com/emojis?access_key=${process.env.EMOJI_API_KEY}`
-  );
-
-  const emojiList = await res.json();
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const emojiList = await getEmojiList()
+  const messages = (await import(`../locales/${locale}.json`)).default
 
   return {
     props: {
       emojiList,
+      messages,
     },
-  };
+  }
 }

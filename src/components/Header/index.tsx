@@ -1,12 +1,20 @@
-import styles from "./styles.module.scss";
+import { useTranslations } from 'next-intl'
+import { LocaleSwitcher } from '../LocaleSwitcher'
+import styles from './styles.module.scss'
 
 export function Header() {
+  const t = useTranslations('Home')
+
   return (
     <header className={styles.header}>
-      <h1 className={styles.headerTitle}>✂️ Emoji Picker</h1>
-      <p className={styles.headerSubtitle}>
-        Search for your favorite emojis and share more easily
-      </p>
+      <div>
+        <h1 className={styles.headerTitle}>✂️ {t('title')}</h1>
+        <p data-testid="description" className={styles.headerSubtitle}>
+          {t('description')}
+        </p>
+      </div>
+
+      <LocaleSwitcher />
     </header>
-  );
+  )
 }
